@@ -1,0 +1,1647 @@
+DATA STRUCTURES USING PYTHON 
+50 Practical Questions with Answers 
+Exam-oriented programs | Simple Python | Uses functions
+
+
+
+ 
+Q1. Append a new item to the end of an array. 
+def append_item(arr, item): 
+    arr.append(item) 
+    return arr 
+ 
+arr = [10, 20, 30, 40] 
+item = int(input("Enter item: ")) 
+print("Original array:", arr) 
+print("After appending:", append_item(arr, item)) 
+ 
+# Sample Output: 
+# Enter item: 50 
+# Original array: [10, 20, 30, 40] 
+# After appending: [10, 20, 30, 40, 50] 
+
+
+
+
+Q2. Ticket booking system using queue (FIFO). 
+def ticket_booking(): 
+    queue = [] 
+    n = int(input("Enter number of people: ")) 
+ 
+    for i in range(n): 
+        name = input("Enter name: ") 
+        queue.append(name) 
+ 
+    print("\nPeople served in order:") 
+    while queue: 
+        person = queue.pop(0) 
+        print(person, "ticket booked") 
+ 
+ticket_booking() 
+ 
+# Sample Output: 
+# Enter number of people: 3 
+# Enter name: A 
+# Enter name: B 
+# Enter name: C 
+# People served in order: 
+# A ticket booked 
+# B ticket booked 
+# C ticket booked 
+
+
+
+Q3. Reverse the order of elements in an array. 
+def reverse_array(arr): 
+    arr.reverse() 
+    return arr 
+ 
+arr = [10, 20, 30, 40, 50] 
+print("Original array:", arr) 
+print("Reversed array:", reverse_array(arr)) 
+ 
+# Output: 
+# Original array: [10, 20, 30, 40, 50] 
+# Reversed array: [50, 40, 30, 20, 10] 
+
+
+
+Q4. Search an element in a singly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None 
+ 
+def search(head, item): 
+    current = head 
+    while current: 
+        if current.data == item: 
+            return True 
+        current = current.next 
+    return False 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = Node(10) 
+head.next = Node(20) 
+head.next.next = Node(30) 
+ 
+print("Linked List:", end=" ") 
+display(head) 
+item = int(input("\nEnter item to search: ")) 
+ 
+if search(head, item): 
+    print("True - Item found") 
+else: 
+    print("False - Item not found") 
+ 
+# Sample Output: 
+# Linked List: 10 20 30 
+# Enter item to search: 20 
+# True - Item found 
+
+
+
+Q5. Find the sum of all odd numbers in an array. 
+def odd_sum(arr): 
+    total = 0 
+    for x in arr: 
+        if x % 2 != 0: 
+            total += x 
+    return total 
+ 
+arr = [10, 15, 20, 25, 30, 35] 
+print("Array:", arr) 
+print("Sum of odd numbers:", odd_sum(arr)) 
+ 
+# Output: 
+# Array: [10, 15, 20, 25, 30, 35] 
+# Sum of odd numbers: 75 
+
+
+
+Q6. Delete the last item from a singly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None 
+ 
+def delete_last(head): 
+    if head is None: 
+        return None 
+    if head.next is None: 
+        return None 
+ 
+    current = head 
+    while current.next.next: 
+        current = current.next 
+ 
+    current.next = None 
+    return head 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = Node(10) 
+head.next = Node(20) 
+head.next.next = Node(30) 
+head.next.next.next = Node(40) 
+ 
+print("Before deletion:", end=" ") 
+display(head) 
+head = delete_last(head) 
+print("\nAfter deletion:", end=" ") 
+display(head) 
+ 
+# Output: 
+# Before deletion: 10 20 30 40 
+# After deletion: 10 20 30 
+
+
+
+Q7. Static implementation of stack of integers. 
+MAX = 5 
+stack = [] 
+top = -1 
+ 
+def push(item): 
+    global top 
+    if top == MAX - 1: 
+        print("Stack Overflow") 
+    else: 
+        stack.append(item) 
+        top += 1 
+ 
+def pop(): 
+    global top 
+    if top == -1: 
+        print("Stack Underflow") 
+    else: 
+        item = stack.pop() 
+        top -= 1 
+        return item 
+ 
+def display(): 
+    print("Stack:", stack) 
+ 
+push(10) 
+push(20) 
+push(30) 
+display() 
+print("Popped:", pop()) 
+display() 
+ 
+# Output: 
+# Stack: [10, 20, 30] 
+# Popped: 30 
+# Stack: [10, 20] 
+
+
+
+Q8. Delete a specific item from a doubly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.prev = None 
+        self.next = None 
+ 
+def delete_item(head, item): 
+    current = head 
+ 
+    while current: 
+        if current.data == item: 
+            if current.prev: 
+                current.prev.next = current.next 
+            else: 
+                head = current.next 
+ 
+            if current.next: 
+                current.next.prev = current.prev 
+ 
+            return head 
+        current = current.next 
+ 
+    return head 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = Node(10) 
+n2 = Node(20) 
+n3 = Node(30) 
+head.next = n2 
+n2.prev = head 
+n2.next = n3 
+n3.prev = n2 
+ 
+print("Before deletion:", end=" ") 
+display(head) 
+item = int(input("\nEnter item to delete: ")) 
+head = delete_item(head, item) 
+print("After deletion:", end=" ") 
+display(head) 
+ 
+# Sample Output: 
+# Before deletion: 10 20 30 
+# Enter item to delete: 20 
+# After deletion: 10 30 
+
+
+
+
+Q9. Perform insertion sort. 
+def insertion_sort(arr): 
+    for i in range(1, len(arr)): 
+        key = arr[i] 
+        j = i - 1 
+ 
+        while j >= 0 and arr[j] > key: 
+            arr[j + 1] = arr[j] 
+            j -= 1 
+ 
+        arr[j + 1] = key 
+ 
+    return arr 
+ 
+arr = [5, 3, 4, 1, 2] 
+print("Original:", arr) 
+print("Sorted:", insertion_sort(arr)) 
+ 
+# Output: 
+# Original: [5, 3, 4, 1, 2] 
+# Sorted: [1, 2, 3, 4, 5] 
+
+
+
+Q10. Convert infix expression to prefix using stack. 
+def precedence(op): 
+    if op in "+-": 
+        return 1 
+    if op in "*/": 
+        return 2 
+    if op == "^": 
+        return 3 
+    return 0 
+ 
+def infix_to_prefix(expr): 
+    expr = expr[::-1] 
+    expr = ''.join('(' if c == ')' else ')' if c == '(' else c for c in expr) 
+ 
+    stack = [] 
+    output = [] 
+ 
+    for c in expr: 
+        if c.isalnum(): 
+            output.append(c) 
+        elif c == '(': 
+            stack.append(c) 
+        elif c == ')': 
+            while stack and stack[-1] != '(': 
+                output.append(stack.pop()) 
+            stack.pop() 
+        else: 
+            while stack and stack[-1] != '(' and precedence(stack[-1]) > 
+precedence(c): 
+                output.append(stack.pop()) 
+            stack.append(c) 
+ 
+    while stack: 
+        output.append(stack.pop()) 
+ 
+    return ''.join(output)[::-1] 
+ 
+expr = input("Enter infix expression: ") 
+print("Prefix:", infix_to_prefix(expr)) 
+ 
+# Sample Output: 
+# Enter infix expression: A+B*C 
+# Prefix: +A*BC
+
+
+
+ 
+Q11. Perform selection sort. 
+def selection_sort(arr): 
+    n = len(arr) 
+ 
+    for i in range(n): 
+        min_index = i 
+ 
+        for j in range(i + 1, n): 
+            if arr[j] < arr[min_index]: 
+                min_index = j 
+ 
+        arr[i], arr[min_index] = arr[min_index], arr[i] 
+ 
+    return arr 
+ 
+arr = [64, 25, 12, 22, 11] 
+print("Original:", arr) 
+print("Sorted:", selection_sort(arr)) 
+ 
+# Output: 
+# Original: [64, 25, 12, 22, 11] 
+# Sorted: [11, 12, 22, 25, 64] 
+
+
+
+Q12. Sort a stack using an auxiliary stack. 
+def sort_stack(stack): 
+    temp = [] 
+ 
+    while stack: 
+        x = stack.pop() 
+ 
+        while temp and temp[-1] > x: 
+            stack.append(temp.pop()) 
+ 
+        temp.append(x) 
+ 
+    return temp 
+ 
+stack = [30, 10, 20, 40] 
+print("Original stack:", stack) 
+print("Sorted stack:", sort_stack(stack)) 
+ 
+# Output: 
+# Original stack: [30, 10, 20, 40] 
+# Sorted stack: [10, 20, 30, 40] 
+
+
+
+Q13. Perform binary search on an ordered list. 
+def binary_search(arr, item): 
+    low = 0 
+    high = len(arr) - 1 
+ 
+    while low <= high: 
+        mid = (low + high) // 2 
+ 
+        if arr[mid] == item: 
+            return True 
+        elif arr[mid] < item: 
+            low = mid + 1 
+        else: 
+            high = mid - 1 
+ 
+    return False 
+ 
+arr = [10, 20, 30, 40, 50] 
+item = int(input("Enter item: ")) 
+ 
+if binary_search(arr, item): 
+    print("Item found") 
+else: 
+    print("Item not found") 
+ 
+# Sample Output: 
+# Enter item: 40 
+# Item found 
+
+
+
+Q14. Dynamic implementation of stack of integers. 
+class Stack: 
+    def __init__(self): 
+        self.stack = [] 
+ 
+    def push(self, item): 
+        self.stack.append(item) 
+ 
+    def pop(self): 
+        if not self.stack: 
+            return "Stack Underflow" 
+        return self.stack.pop() 
+ 
+    def display(self): 
+        print("Stack:", self.stack) 
+ 
+s = Stack() 
+s.push(10) 
+s.push(20) 
+s.push(30) 
+s.display() 
+print("Popped:", s.pop()) 
+s.display() 
+# Output: 
+# Stack: [10, 20, 30] 
+# Popped: 30 
+# Stack: [10, 20] 
+
+
+
+Q15. Perform quick sort. 
+def quick_sort(arr): 
+if len(arr) <= 1: 
+return arr 
+pivot = arr[0] 
+left = [x for x in arr[1:] if x <= pivot] 
+right = [x for x in arr[1:] if x > pivot] 
+return quick_sort(left) + [pivot] + quick_sort(right) 
+arr = [10, 7, 8, 9, 1, 5] 
+print("Original:", arr) 
+print("Sorted:", quick_sort(arr)) 
+# Output: 
+# Original: [10, 7, 8, 9, 1, 5] 
+# Sorted: [1, 5, 7, 8, 9, 10] 
+
+
+
+Q16. Check whether two stacks are identical. 
+def identical(stack1, stack2): 
+return stack1 == stack2 
+s1 = [10, 20, 30] 
+s2 = [10, 20, 30] 
+print("Stack 1:", s1) 
+print("Stack 2:", s2) 
+if identical(s1, s2): 
+print("Stacks are identical") 
+else: 
+print("Stacks are not identical") 
+# Output: 
+# Stack 1: [10, 20, 30] 
+# Stack 2: [10, 20, 30] 
+# Stacks are identical
+
+
+
+
+ 
+Q17. Perform merge sort. 
+def merge_sort(arr): 
+if len(arr) <= 1: 
+return arr 
+mid = len(arr) // 2 
+    left = merge_sort(arr[:mid]) 
+    right = merge_sort(arr[mid:]) 
+ 
+    result = [] 
+    i = j = 0 
+ 
+    while i < len(left) and j < len(right): 
+        if left[i] <= right[j]: 
+            result.append(left[i]) 
+            i += 1 
+        else: 
+            result.append(right[j]) 
+            j += 1 
+ 
+    result.extend(left[i:]) 
+    result.extend(right[j:]) 
+    return result 
+ 
+arr = [38, 27, 43, 3, 9, 82, 10] 
+print("Original:", arr) 
+print("Sorted:", merge_sort(arr)) 
+ 
+# Output: 
+# Original: [38, 27, 43, 3, 9, 82, 10] 
+# Sorted: [3, 9, 10, 27, 38, 43, 82] 
+
+
+
+Q18. Evaluate a postfix expression using stack. 
+def evaluate_postfix(expr): 
+    stack = [] 
+ 
+    for token in expr.split(): 
+        if token.isdigit(): 
+            stack.append(int(token)) 
+        else: 
+            b = stack.pop() 
+            a = stack.pop() 
+ 
+            if token == '+': 
+                stack.append(a + b) 
+            elif token == '-': 
+                stack.append(a - b) 
+            elif token == '*': 
+                stack.append(a * b) 
+            elif token == '/': 
+                stack.append(a / b) 
+ 
+    return stack.pop() 
+ 
+expr = input("Enter postfix expression (space separated): ") 
+print("Result:", evaluate_postfix(expr)) 
+ 
+# Sample Output: 
+# Enter postfix expression (space separated): 5 6 2 + * 
+# Result: 40 
+
+
+
+Q19. Find sum of odd numbers in an array. 
+def odd_sum(arr): 
+    total = 0 
+    for x in arr: 
+        if x % 2 != 0: 
+            total += x 
+    return total 
+ 
+arr = [1, 2, 3, 4, 5, 6] 
+print("Array:", arr) 
+print("Sum of odd numbers:", odd_sum(arr)) 
+ 
+# Output: 
+# Array: [1, 2, 3, 4, 5, 6] 
+# Sum of odd numbers: 9 
+
+
+
+Q20. Convert infix expression to postfix using stack. 
+def precedence(op): 
+    if op in "+-": 
+        return 1 
+    if op in "*/": 
+        return 2 
+    if op == "^": 
+        return 3 
+    return 0 
+ 
+def infix_to_postfix(expr): 
+    stack = [] 
+    output = [] 
+ 
+    for c in expr: 
+        if c.isalnum(): 
+            output.append(c) 
+        elif c == '(': 
+            stack.append(c) 
+        elif c == ')': 
+            while stack and stack[-1] != '(': 
+                output.append(stack.pop()) 
+            stack.pop() 
+        else: 
+            while stack and stack[-1] != '(' and precedence(stack[-1]) >= 
+precedence(c): 
+                output.append(stack.pop()) 
+            stack.append(c) 
+ 
+    while stack: 
+        output.append(stack.pop()) 
+ 
+    return ''.join(output) 
+ 
+expr = input("Enter infix expression: ") 
+print("Postfix:", infix_to_postfix(expr)) 
+ 
+# Sample Output: 
+# Enter infix expression: A+B*C 
+# Postfix: ABC*+ 
+
+
+
+Q21. Perform quick sort. 
+def quick_sort(arr): 
+    if len(arr) <= 1: 
+        return arr 
+ 
+    pivot = arr[0] 
+    left = [x for x in arr[1:] if x <= pivot] 
+    right = [x for x in arr[1:] if x > pivot] 
+ 
+    return quick_sort(left) + [pivot] + quick_sort(right) 
+ 
+arr = [5, 2, 9, 1, 7] 
+print("Original:", arr) 
+print("Sorted:", quick_sort(arr)) 
+ 
+# Output: 
+# Original: [5, 2, 9, 1, 7] 
+# Sorted: [1, 2, 5, 7, 9]
+
+
+ 
+Q22. Create and display a graph using adjacency list. 
+def create_graph(): 
+    graph = {} 
+    n = int(input("Enter number of vertices: ")) 
+ 
+    for i in range(n): 
+        graph[i] = [] 
+ 
+    e = int(input("Enter number of edges: ")) 
+ 
+    for _ in range(e): 
+        u, v = map(int, input("Enter edge u v: ").split()) 
+        graph[u].append(v) 
+        graph[v].append(u) 
+ 
+    return graph 
+ 
+def display_graph(graph): 
+    for vertex in graph: 
+        print(vertex, "->", graph[vertex]) 
+ 
+graph = create_graph() 
+display_graph(graph) 
+ 
+# Sample Input: 
+# 4 
+# 4 
+# 0 1 
+# 0 2 
+# 1 3 
+# 2 3 
+# 
+# Sample Output: 
+# 0 -> [1, 2] 
+# 1 -> [0, 3] 
+# 2 -> [0, 3] 
+# 3 -> [1, 2] 
+Q23. Perform insertion sort. 
+def insertion_sort(arr): 
+    for i in range(1, len(arr)): 
+        key = arr[i] 
+        j = i - 1 
+ 
+        while j >= 0 and arr[j] > key: 
+            arr[j + 1] = arr[j] 
+            j -= 1 
+ 
+        arr[j + 1] = key 
+ 
+    return arr 
+ 
+arr = [9, 5, 1, 4, 3] 
+print("Sorted:", insertion_sort(arr)) 
+ 
+# Output: 
+# Sorted: [1, 3, 4, 5, 9] 
+
+
+
+Q24. Create a doubly linked list, append items and iterate forward. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.prev = None 
+        self.next = None 
+ 
+def append(head, data): 
+    new_node = Node(data) 
+ 
+    if head is None: 
+        return new_node 
+ 
+    current = head 
+    while current.next: 
+        current = current.next 
+ 
+    current.next = new_node 
+    new_node.prev = current 
+    return head 
+ 
+def display_forward(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = None 
+head = append(head, 10) 
+head = append(head, 20) 
+head = append(head, 30) 
+ 
+print("Doubly Linked List:", end=" ") 
+display_forward(head) 
+ 
+# Output: 
+# Doubly Linked List: 10 20 30 
+
+
+Q25. Find the length of a singly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None 
+ 
+def length(head): 
+    count = 0 
+    current = head 
+ 
+    while current: 
+        count += 1 
+        current = current.next 
+ 
+    return count 
+ 
+head = Node(10) 
+head.next = Node(20) 
+head.next.next = Node(30) 
+ 
+print("Length:", length(head)) 
+ 
+# Output: 
+# Length: 3 
+
+
+Q26. Check string palindrome using a static stack. 
+def is_palindrome(s): 
+    stack = list(s) 
+    reverse = "" 
+ 
+    while stack: 
+        reverse += stack.pop() 
+ 
+    return s == reverse 
+ 
+s = input("Enter string: ") 
+ 
+if is_palindrome(s): 
+    print("Palindrome") 
+else: 
+    print("Not Palindrome") 
+ 
+# Sample Output: 
+# Enter string: madam 
+# Palindrome 
+
+
+
+Q27. Find number of occurrences of an element in an array. 
+def count_occurrences(arr, item): 
+    count = 0 
+ 
+    for x in arr: 
+        if x == item: 
+            count += 1 
+ 
+    return count 
+ 
+arr = [10, 20, 10, 30, 10, 40] 
+item = int(input("Enter item: ")) 
+ 
+print("Occurrences:", count_occurrences(arr, item)) 
+ 
+# Sample Output: 
+# Enter item: 10 
+# Occurrences: 3 
+
+
+
+Q28. Print nodes from current position to the first node in a doubly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.prev = None 
+        self.next = None 
+ 
+def display_to_first(current): 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.prev 
+ 
+n1 = Node(10) 
+n2 = Node(20) 
+n3 = Node(30) 
+ 
+n1.next = n2 
+n2.prev = n1 
+n2.next = n3 
+n3.prev = n2 
+ 
+print("From current node to first:") 
+display_to_first(n3) 
+ 
+# Output: 
+# From current node to first: 
+# 30 20 10 
+
+
+
+
+Q29. Implement a circular queue. 
+class CircularQueue: 
+    def __init__(self, size): 
+        self.queue = [None] * size 
+        self.size = size 
+        self.front = -1 
+        self.rear = -1 
+ 
+    def enqueue(self, item): 
+        if (self.rear + 1) % self.size == self.front: 
+            print("Queue Overflow") 
+            return 
+ 
+        if self.front == -1: 
+            self.front = 0 
+ 
+        self.rear = (self.rear + 1) % self.size 
+        self.queue[self.rear] = item 
+ 
+    def dequeue(self): 
+        if self.front == -1: 
+            return "Queue Underflow" 
+ 
+        item = self.queue[self.front] 
+ 
+        if self.front == self.rear: 
+            self.front = self.rear = -1 
+        else: 
+            self.front = (self.front + 1) % self.size 
+ 
+        return item 
+ 
+    def display(self): 
+        if self.front == -1: 
+            print("Queue is empty") 
+            return 
+ 
+        i = self.front 
+        result = [] 
+        while True: 
+            result.append(self.queue[i]) 
+            if i == self.rear: 
+                break 
+            i = (i + 1) % self.size 
+ 
+        print("Queue:", result) 
+ 
+q = CircularQueue(5) 
+q.enqueue(10) 
+q.enqueue(20) 
+q.enqueue(30) 
+q.display() 
+print("Deleted:", q.dequeue()) 
+q.display() 
+ 
+# Output: 
+# Queue: [10, 20, 30] 
+# Deleted: 10 
+# Queue: [20, 30] 
+
+
+
+
+Q30. Display/search an element in a Binary Search Tree. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def search(root, item): 
+    if root is None: 
+        return False 
+    if root.data == item: 
+        return True 
+    if item < root.data: 
+        return search(root.left, item) 
+    return search(root.right, item) 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+item = int(input("Enter item to search: ")) 
+ 
+if search(root, item): 
+    print("Item found in BST") 
+else: 
+    print("Item not found") 
+ 
+# Sample Output: 
+# Enter item to search: 40 
+# Item found in BST 
+
+
+
+
+Q31. Create a Binary Search Tree for string data. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def inorder(root): 
+    if root: 
+        inorder(root.left) 
+        print(root.data, end=" ") 
+        inorder(root.right) 
+ 
+root = None 
+for word in ["Mango", "Apple", "Banana", "Orange"]: 
+    root = insert(root, word) 
+ 
+print("Inorder:") 
+inorder(root) 
+ 
+# Output: 
+# Inorder: 
+# Apple Banana Mango Orange
+
+
+ 
+Q32. Implement circular queue of integers using a list. 
+def enqueue(queue, item, size): 
+    if len(queue) == size: 
+        print("Queue Full") 
+    else: 
+        queue.append(item) 
+ 
+def dequeue(queue): 
+    if not queue: 
+        print("Queue Empty") 
+    else: 
+        return queue.pop(0) 
+ 
+def display(queue): 
+    print("Queue:", queue) 
+ 
+queue = [] 
+size = 5 
+ 
+enqueue(queue, 10, size) 
+enqueue(queue, 20, size) 
+enqueue(queue, 30, size) 
+display(queue) 
+print("Deleted:", dequeue(queue)) 
+display(queue) 
+ 
+# Output: 
+# Queue: [10, 20, 30] 
+# Deleted: 10 
+# Queue: [20, 30] 
+
+
+
+Q33. Implement priority queue of integers using a list. 
+def insert_priority(queue, item): 
+    queue.append(item) 
+    queue.sort() 
+ 
+def delete_priority(queue): 
+    if not queue: 
+        return "Queue Empty" 
+    return queue.pop(0) 
+ 
+queue = [] 
+insert_priority(queue, 30) 
+insert_priority(queue, 10) 
+insert_priority(queue, 20) 
+ 
+print("Priority Queue:", queue) 
+print("Deleted:", delete_priority(queue)) 
+print("After deletion:", queue) 
+ 
+# Output: 
+# Priority Queue: [10, 20, 30] 
+# Deleted: 10 
+# After deletion: [20, 30] 
+
+
+
+Q34. Check whether a binary tree is balanced. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def height(root): 
+    if root is None: 
+        return 0 
+ 
+    return 1 + max(height(root.left), height(root.right)) 
+ 
+def is_balanced(root): 
+    if root is None: 
+        return True 
+ 
+    left_height = height(root.left) 
+    right_height = height(root.right) 
+ 
+    return (abs(left_height - right_height) <= 1 
+            and is_balanced(root.left) 
+            and is_balanced(root.right)) 
+ 
+root = Node(10) 
+root.left = Node(20) 
+root.right = Node(30) 
+ 
+if is_balanced(root): 
+    print("Binary tree is balanced") 
+else: 
+    print("Binary tree is not balanced") 
+ 
+# Output: 
+# Binary tree is balanced
+
+ 
+Q35. Remove duplicate elements from an unsorted linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None 
+ 
+def remove_duplicates(head): 
+    seen = set() 
+    current = head 
+    previous = None 
+ 
+    while current: 
+        if current.data in seen: 
+            previous.next = current.next 
+        else: 
+            seen.add(current.data) 
+            previous = current 
+ 
+        current = current.next 
+ 
+    return head 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = Node(10) 
+head.next = Node(20) 
+head.next.next = Node(10) 
+head.next.next.next = Node(30) 
+ 
+print("Before:", end=" ") 
+display(head) 
+head = remove_duplicates(head) 
+print("\nAfter:", end=" ") 
+display(head) 
+ 
+# Output: 
+# Before: 10 20 10 30 
+# After: 10 20 30 
+
+
+
+Q36. Count total nodes and total leaf nodes in a BST. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def count_nodes(root): 
+    if root is None: 
+        return 0 
+    return 1 + count_nodes(root.left) + count_nodes(root.right) 
+ 
+def count_leaves(root): 
+    if root is None: 
+        return 0 
+    if root.left is None and root.right is None: 
+        return 1 
+    return count_leaves(root.left) + count_leaves(root.right) 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+print("Total nodes:", count_nodes(root)) 
+print("Total leaf nodes:", count_leaves(root)) 
+ 
+# Output: 
+# Total nodes: 5 
+# Total leaf nodes: 3 
+
+
+
+Q37. Create adjacency matrix and print in-degree, out-degree and total degree. 
+def graph_degrees(): 
+    n = int(input("Enter number of vertices: ")) 
+    matrix = [] 
+ 
+    print("Enter adjacency matrix:") 
+    for i in range(n): 
+        row = list(map(int, input().split())) 
+        matrix.append(row) 
+ 
+    for i in range(n): 
+        out_degree = sum(matrix[i]) 
+        in_degree = sum(matrix[j][i] for j in range(n)) 
+        total_degree = in_degree + out_degree 
+ 
+        print("Vertex", i, 
+              "In-degree:", in_degree, 
+              "Out-degree:", out_degree, 
+              "Total:", total_degree) 
+ 
+graph_degrees() 
+ 
+# Sample Input: 
+# 3 
+# 0 1 1 
+# 0 0 1 
+# 1 0 0 
+# 
+# Sample Output: 
+# Vertex 0 In-degree: 1 Out-degree: 2 Total: 3 
+# Vertex 1 In-degree: 1 Out-degree: 1 Total: 2 
+# Vertex 2 In-degree: 2 Out-degree: 1 Total: 3 
+
+
+
+Q38. Dynamic implementation of queue for integers. 
+class Queue: 
+    def __init__(self): 
+        self.queue = [] 
+ 
+    def enqueue(self, item): 
+        self.queue.append(item) 
+ 
+    def dequeue(self): 
+        if not self.queue: 
+            return "Queue Underflow" 
+        return self.queue.pop(0) 
+ 
+    def display(self): 
+        print("Queue:", self.queue) 
+ 
+q = Queue() 
+q.enqueue(10) 
+q.enqueue(20) 
+q.enqueue(30) 
+q.display() 
+print("Deleted:", q.dequeue()) 
+q.display() 
+ 
+# Output: 
+# Queue: [10, 20, 30] 
+# Deleted: 10 
+# Queue: [20, 30] 
+
+
+
+Q39. Create BST, insert elements and perform inorder traversal. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def inorder(root): 
+    if root: 
+        inorder(root.left) 
+        print(root.data, end=" ") 
+        inorder(root.right) 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+print("Inorder:", end=" ") 
+inorder(root) 
+ 
+# Output: 
+# Inorder: 20 30 40 50 70 
+Q40. Search a specific item in a doubly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.prev = None 
+        self.next = None 
+ 
+def search(head, item): 
+    current = head 
+ 
+    while current: 
+        if current.data == item: 
+            return True 
+        current = current.next 
+ 
+    return False 
+ 
+head = Node(10) 
+n2 = Node(20) 
+n3 = Node(30) 
+ 
+head.next = n2 
+n2.prev = head 
+n2.next = n3 
+n3.prev = n2 
+ 
+item = int(input("Enter item to search: ")) 
+ 
+if search(head, item): 
+    print("True - Item found") 
+else: 
+    print("False - Item not found") 
+ 
+# Sample Output: 
+# Enter item to search: 30 
+# True - Item found 
+
+
+
+
+Q41. Create BST, insert elements and perform preorder traversal. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def preorder(root): 
+    if root: 
+        print(root.data, end=" ") 
+        preorder(root.left) 
+        preorder(root.right) 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+print("Preorder:", end=" ") 
+preorder(root) 
+ 
+# Output: 
+# Preorder: 50 30 20 40 70 
+
+
+
+
+Q42. Perform topological sorting. 
+def topological_sort(graph): 
+    indegree = {v: 0 for v in graph} 
+ 
+    for v in graph: 
+        for neighbor in graph[v]: 
+            indegree[neighbor] += 1 
+ 
+    queue = [v for v in graph if indegree[v] == 0] 
+    result = [] 
+ 
+    while queue: 
+        v = queue.pop(0) 
+        result.append(v) 
+ 
+        for neighbor in graph[v]: 
+            indegree[neighbor] -= 1 
+            if indegree[neighbor] == 0: 
+                queue.append(neighbor) 
+ 
+    return result 
+ 
+graph = { 
+    0: [1, 2], 
+    1: [3], 
+    2: [3], 
+    3: [] 
+} 
+ 
+print("Topological Order:", topological_sort(graph)) 
+ 
+# Output: 
+# Topological Order: [0, 1, 2, 3] 
+
+
+
+Q43. Create BST, insert elements and perform postorder traversal. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    else: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def postorder(root): 
+    if root: 
+        postorder(root.left) 
+        postorder(root.right) 
+        print(root.data, end=" ") 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+print("Postorder:", end=" ") 
+postorder(root) 
+ 
+# Output: 
+# Postorder: 20 40 30 70 50
+
+
+ 
+Q44. Insert an item at the front of a doubly linked list. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.prev = None 
+        self.next = None 
+ 
+def insert_front(head, data): 
+    new_node = Node(data) 
+    new_node.next = head 
+ 
+    if head: 
+        head.prev = new_node 
+ 
+    return new_node 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = Node(20) 
+head.next = Node(30) 
+head.next.prev = head 
+ 
+print("Before:", end=" ") 
+display(head) 
+ 
+head = insert_front(head, 10) 
+ 
+print("\nAfter:", end=" ") 
+display(head) 
+ 
+# Output: 
+# Before: 20 30 
+# After: 10 20 30 
+
+
+
+
+Q45. Create BST, search and insert an item. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def insert(root, data): 
+    if root is None: 
+        return Node(data) 
+ 
+    if data < root.data: 
+        root.left = insert(root.left, data) 
+    elif data > root.data: 
+        root.right = insert(root.right, data) 
+ 
+    return root 
+ 
+def search(root, item): 
+    if root is None: 
+        return False 
+    if root.data == item: 
+        return True 
+    if item < root.data: 
+        return search(root.left, item) 
+    return search(root.right, item) 
+ 
+def inorder(root): 
+    if root: 
+        inorder(root.left) 
+        print(root.data, end=" ") 
+        inorder(root.right) 
+ 
+root = None 
+for x in [50, 30, 70, 20, 40]: 
+    root = insert(root, x) 
+ 
+item = int(input("Enter item to search: ")) 
+ 
+if search(root, item): 
+    print("Item found") 
+else: 
+    print("Item not found. Inserting item...") 
+    root = insert(root, item) 
+ 
+print("BST inorder:", end=" ") 
+inorder(root) 
+ 
+# Sample Output: 
+# Enter item to search: 60 
+# Item not found. Inserting item... 
+# BST inorder: 20 30 40 50 60 70
+
+
+ 
+Q46. Reverse each word/string using a static stack. 
+def reverse_string(s): 
+    stack = list(s) 
+    result = "" 
+ 
+    while stack: 
+        result += stack.pop() 
+ 
+    return result 
+ 
+s = input("Enter string: ") 
+print("Reversed:", reverse_string(s)) 
+ 
+# Sample Output: 
+# Enter string: Welcome to class. 
+# Reversed: .ssalc ot emocleW 
+
+
+
+
+Q47. Perform bubble sort. 
+def bubble_sort(arr): 
+    n = len(arr) 
+ 
+    for i in range(n): 
+        for j in range(0, n - i - 1): 
+            if arr[j] > arr[j + 1]: 
+                arr[j], arr[j + 1] = arr[j + 1], arr[j] 
+ 
+    return arr 
+ 
+arr = [5, 1, 4, 2, 8] 
+print("Original:", arr) 
+print("Sorted:", bubble_sort(arr)) 
+ 
+# Output: 
+# Original: [5, 1, 4, 2, 8] 
+# Sorted: [1, 2, 4, 5, 8] 
+
+
+
+Q48. Create a singly linked list, append items and iterate. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None 
+ 
+def append(head, data): 
+    new_node = Node(data) 
+ 
+    if head is None: 
+        return new_node 
+ 
+    current = head 
+    while current.next: 
+        current = current.next 
+ 
+    current.next = new_node 
+    return head 
+ 
+def display(head): 
+    current = head 
+    while current: 
+        print(current.data, end=" ") 
+        current = current.next 
+ 
+head = None 
+head = append(head, 10) 
+head = append(head, 20) 
+head = append(head, 30) 
+ 
+print("Singly Linked List:", end=" ") 
+display(head) 
+ 
+# Output: 
+# Singly Linked List: 10 20 30 
+
+
+Q49. Perform linear search. 
+def linear_search(arr, item): 
+    for i in range(len(arr)): 
+        if arr[i] == item: 
+            return i 
+    return -1 
+ 
+arr = [10, 20, 30, 40, 50] 
+item = int(input("Enter item: ")) 
+ 
+position = linear_search(arr, item) 
+ 
+if position != -1: 
+    print("Item found at position:", position) 
+else: 
+    print("Item not found") 
+ 
+# Sample Output: 
+# Enter item: 30 
+# Item found at position: 2 
+
+
+Q50. Find height and depth of a binary tree. 
+class Node: 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None 
+        self.right = None 
+ 
+def height(root): 
+    if root is None: 
+        return 0 
+ 
+    return 1 + max(height(root.left), height(root.right)) 
+ 
+def depth(root): 
+    return height(root) - 1 
+ 
+root = Node(10) 
+root.left = Node(20) 
+root.right = Node(30) 
+root.left.left = Node(40) 
+ 
+print("Height:", height(root)) 
+print("Depth:", depth(root)) 
+ 
+# Output: 
+# Height: 3 
+# Depth: 2 
+ 
+Quick Viva Revision 
+What is a stack? A linear data structure that follows LIFO (Last In, First Out). 
+What is a queue? A linear data structure that follows FIFO (First In, First Out). 
+What is a linked list? A collection of nodes where each node stores data and a link to another 
+node. 
+What is a doubly linked list? A linked list whose node has both prev and next links. 
+What is BST? Binary Search Tree; smaller values go left and larger values go right. 
+What is linear search? Sequentially checks each element until the item is found. 
+What is binary search? Searches a sorted list by repeatedly dividing the search range in half. 
+What is insertion sort? Builds the sorted list one element at a time by inserting each item in its 
+correct position. 
+What is selection sort? Repeatedly selects the smallest element and places it in the correct 
+position. 
+What is bubble sort? Repeatedly compares adjacent elements and swaps them when they are 
+in the wrong order. 
+What is quick sort? A divide-and-conquer sorting method based on a pivot. 
+What is merge sort? A divide-and-conquer sort that divides the list and merges sorted parts. 
+What is adjacency list? A graph representation that stores a list of neighbors for each vertex. 
+What is topological sorting? A linear ordering of vertices of a directed acyclic graph (DAG). 
+What does def mean in Python? It is used to define a function. 
+Exam Tip: Practice typing the programs yourself. Focus especially on Stack, Sorting, Searching, 
+Queue, Linked List, BST and Graph programs. 
